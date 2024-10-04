@@ -7,7 +7,11 @@
             "H1ch4m\\LangManager\\": "src/"
         }
     },
-    "require": {},
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^8.0",
+        "laravel/framework": "^6.0"
+    },
     "extra": {
         "laravel": {
             "providers": [
