@@ -29,7 +29,7 @@ class LanguageCommand extends Command
 
         $directory = base_path('resources/views');
         if ($user_directory) {
-            $user_directory = str_replace('\\', '/', $user_directory);
+            $user_directory = preg_replace('/\\\\/', '/', $user_directory);
 
             if (!is_dir($user_directory)) {
                 $this->error('The given path is not exists.');
@@ -47,8 +47,8 @@ class LanguageCommand extends Command
         }
         $this->info('Start, Please wait ...');
 
-        $this->info("Working on all files on directory:\n\n");
-        $this->info($directory);
+        $this->info("Working on all files on directory:");
+        $this->info($directory . "\n\n");
 
         $this->get_all_files($directory, $lang);
 
