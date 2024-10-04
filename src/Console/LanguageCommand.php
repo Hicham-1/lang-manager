@@ -87,7 +87,7 @@ class LanguageCommand extends Command
             return;
         }
 
-        $folder = explode('/', $file);
+        $folder = explode('/', preg_replace('/\\\\/', '/', $file));
         $folder = $folder[count($folder) - 2];
 
         $this->warn($file);
