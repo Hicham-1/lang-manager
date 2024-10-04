@@ -91,9 +91,6 @@ class LanguageCommand extends Command
         $folder = explode('/', $file);
         $folder = $folder[count($folder) - 2];
 
-        $this->warn($file);
-        $this->warn($folder);
-
         $translation_file = 'lang/' . $lang . '/' . $folder . '.php';
 
         $translations = [];
@@ -116,9 +113,9 @@ class LanguageCommand extends Command
 
             if (!array_key_exists($new_key, $translations)) {
                 $translations[$new_key] = $sentence;
-
-                $content = str_replace("__('$sentence')", "__('$folder.$new_key')", $content);
             }
+
+            $content = str_replace("__('$sentence')", "__('$folder.$new_key')", $content);
         }
 
         file_put_contents($file, $content);
