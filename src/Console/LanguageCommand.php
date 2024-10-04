@@ -120,7 +120,7 @@ class LanguageCommand extends Command
                 $content = str_replace("__('$sentence')", "__('$folder.$new_key')", $content);
             }
 
-            if (($folder . $new_key) != $sentence) {
+            if ($new_key != $sentence) {
                 $content = str_replace("__('$sentence')", "__('$folder.$new_key')", $content);
             }
         }
@@ -131,7 +131,7 @@ class LanguageCommand extends Command
 
     private function translation_key_prepare($sentence)
     {
-        $sentence = preg_replace('/[^a-zA-Z0-9_ ]/', '', $sentence);
+        $sentence = preg_replace('/[^a-zA-Z0-9\._ ]/', '', $sentence);
 
         $formatted = strtolower(str_replace(' ', '_', trim($sentence)));
 
