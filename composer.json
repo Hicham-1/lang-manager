@@ -1,0 +1,18 @@
+{
+    "name": "h1ch4m/lang-manager",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "H1ch4m\\LangManager\\": "src/"
+        }
+    },
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "H1ch4m\\LangManager\\LangManagerServiceProvider"
+            ]
+        }
+    }
+}
