@@ -11,7 +11,7 @@ class LanguageCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'lang-manager:test';
+    protected $signature = 'lang-manager:start';
 
     /**
      * The console command description.
@@ -39,7 +39,7 @@ class LanguageCommand extends Command
             $directory = base_path($user_directory);
         }
 
-        $user_lang = $this->ask('Enter your files language (default is en):');
+        $user_lang = $this->ask('Enter your files language (default is en)');
 
         $lang = 'en';
         if ($user_lang) {
