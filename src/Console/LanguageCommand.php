@@ -47,12 +47,12 @@ class LanguageCommand extends Command
         }
         $this->info('Start, Please wait ...');
 
-        $this->info("Working on all files on directory:\n");
+        $this->info("Working on all files on directory:\n\n");
         $this->info($directory);
 
         $this->get_all_files($directory, $lang);
 
-        $this->info("\nEnd");
+        $this->info("\n\nEnd");
     }
 
 
@@ -73,6 +73,7 @@ class LanguageCommand extends Command
                 $files = array_merge($files, $this->get_all_files($path, $lang));
             } else {
                 $files[] = $path;
+                $this->info("$path\n");
                 $this->scan_and_replace_translations($path, $lang);
             }
         }
