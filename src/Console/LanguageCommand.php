@@ -89,7 +89,11 @@ class LanguageCommand extends Command
         }
 
         $folder = explode('/', $file);
-        $folder = $folder[count($folder) - 2];
+        if (count($folder) > 1) {
+            $folder = $folder[count($folder) - 2];
+        } else {
+            $folder = $folder[0];
+        }
 
         $translation_file = 'lang/' . $lang . '/' . $folder . '.php';
 
@@ -113,9 +117,12 @@ class LanguageCommand extends Command
 
             if (!array_key_exists($new_key, $translations)) {
                 $translations[$new_key] = $sentence;
+                $content = str_replace("__('$sentence')", "__('$folder.$new_key')", $content);
             }
 
-            $content = str_replace("__('$sentence')", "__('$folder.$new_key')", $content);
+            if (($folder . $new_key) != $sentence) {
+                $content = str_replace("__('$sentence')", "__('$folder.$new_key')", $content);
+            }
         }
 
         file_put_contents($file, $content);
