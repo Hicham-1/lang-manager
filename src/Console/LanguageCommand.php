@@ -90,6 +90,9 @@ class LanguageCommand extends Command
         $folder = explode('/', $file);
         $folder = $folder[count($folder) - 2];
 
+        $this->wan($file);
+        $this->wan($folder);
+
         $translation_file = 'lang/' . $lang . '/' . $folder . '.php';
 
         $translations = [];
