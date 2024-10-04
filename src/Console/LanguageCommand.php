@@ -131,7 +131,11 @@ class LanguageCommand extends Command
 
     private function translation_key_prepare($sentence)
     {
-        $formatted = strtolower(str_replace(' ', '_', trim($sentence)));
+        $formatted = strtolower(trim($sentence));
+
+        $formatted = str_replace(' ', '_', $formatted);
+
+        $formatted = preg_replace('/[^a-z_]/', '', $formatted);
 
         $words = explode(' ', $sentence);
 
@@ -139,7 +143,9 @@ class LanguageCommand extends Command
             $first_four_words = implode('_', array_slice($words, 0, 4));
             $rest_word_count = count($words) - 4;
 
-            return strtolower($first_four_words) . '_' . $rest_word_count;
+            $first_four_words = preg_replace('/[^a-z_]/', '', strtolower(trim($first_four_words)));
+
+            return $first_four_words . '_' . $rest_word_count;
         }
 
         return $formatted;
