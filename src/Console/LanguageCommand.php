@@ -45,7 +45,7 @@ class LanguageCommand extends Command
         if ($user_lang) {
             $lang = $user_lang;
         }
-        $this->info('Start ...');
+        $this->info('Start, Please ...');
 
         $this->info("Working on all files on directory:\n");
         $this->info($directory);
