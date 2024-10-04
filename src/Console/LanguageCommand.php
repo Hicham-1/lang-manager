@@ -68,6 +68,7 @@ class LanguageCommand extends Command
             }
 
             $path = $directory . DIRECTORY_SEPARATOR . $item;
+            $path = preg_replace('/\\\\/', '/', $path);
 
             if (is_dir($path)) {
                 $files = array_merge($files, $this->get_all_files($path, $lang));
@@ -87,7 +88,7 @@ class LanguageCommand extends Command
             return;
         }
 
-        $folder = explode('/', preg_replace('/\\\\/', '/', $file));
+        $folder = explode('/', $file);
         $folder = $folder[count($folder) - 2];
 
         $this->warn($file);
