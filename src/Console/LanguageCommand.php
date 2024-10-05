@@ -116,7 +116,7 @@ class LanguageCommand extends Command
             $new_key = $this->translation_key_prepare($sentence);
 
 
-            if (!\Lang::has($new_key)) {
+            if (!\Lang::has($new_key, $lang)) {
                 $translations[$new_key] = $sentence;
                 $content = str_replace("__('$sentence')", "__('$folder.$new_key')", $content);
             }
