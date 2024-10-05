@@ -115,7 +115,7 @@ class LanguageCommand extends Command
         foreach ($matches[1] as $sentence) {
             $new_key = $this->translation_key_prepare($sentence);
 
-            $path = resource_path("lang/{$lang}/{$new_key}.php");
+            $path = resource_path("lang/{$lang}/{$sentence}.php");
 
             if (\File::exists($path) || !\Lang::has($new_key, $lang)) {
                 $translations[$new_key] = $sentence;
