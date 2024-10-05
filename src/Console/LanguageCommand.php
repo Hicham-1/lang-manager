@@ -95,7 +95,7 @@ class LanguageCommand extends Command
             $folder = $folder[0];
         }
 
-        $translation_file = 'lang/' . $lang . '/' . $folder . '.php';
+        $translation_file = "lang/{$lang}/{$folder}.php";
 
         $translations = [];
         if (is_file($translation_file)) {
@@ -115,8 +115,9 @@ class LanguageCommand extends Command
         foreach ($matches[1] as $sentence) {
             $new_key = $this->translation_key_prepare($sentence);
 
+            $path = resource_path("lang/{$lang}/{$new_key}.php");
 
-            if (!\Lang::has($new_key, $lang)) {
+            if (\File::exists($path) || !\Lang::has($new_key, $lang)) {
                 $translations[$new_key] = $sentence;
                 $content = str_replace("__('$sentence')", "__('$folder.$new_key')", $content);
             }
