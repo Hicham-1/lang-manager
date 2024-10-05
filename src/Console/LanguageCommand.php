@@ -115,7 +115,7 @@ class LanguageCommand extends Command
         foreach ($matches[1] as $sentence) {
             $new_key = $this->translation_key_prepare($sentence);
 
-            if (!array_key_exists($new_key, $translations)) {
+            if (empty(__($new_key))) {
                 $translations[$new_key] = $sentence;
                 $content = str_replace("__('$sentence')", "__('$folder.$new_key')", $content);
             }
