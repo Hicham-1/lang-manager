@@ -115,11 +115,8 @@ class LanguageCommand extends Command
         foreach ($matches[1] as $sentence) {
             $new_key = $this->translation_key_prepare($sentence);
 
-            switch_to_locale($lang);
-            $translated_text = __($new_key);
-            restore_previous_locale();
 
-            if (empty($translated_text)) {
+            if (!\Lang::has($new_key)) {
                 $translations[$new_key] = $sentence;
                 $content = str_replace("__('$sentence')", "__('$folder.$new_key')", $content);
             }
