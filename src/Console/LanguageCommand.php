@@ -117,7 +117,7 @@ class LanguageCommand extends Command
 
             $path = resource_path("lang/{$lang}/{$sentence}.php");
 
-            if (\File::exists($path) || !\Lang::has($new_key, $lang)) {
+            if (is_file($path) || !\Lang::has($new_key, $lang)) {
                 $translations[$new_key] = $sentence;
                 $content = str_replace("__('$sentence')", "__('$folder.$new_key')", $content);
             }
