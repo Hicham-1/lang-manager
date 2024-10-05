@@ -121,8 +121,9 @@ class LanguageCommand extends Command
                 $content = str_replace("__('$sentence')", "__('$folder.$new_key')", $content);
             }
 
-            if ($new_key != $sentence) {
-                $content = str_replace("__('$sentence')", "__('$folder.$new_key')", $content);
+            //$new_key != $sentence
+            if (!\Lang::has($sentence, $lang)) {
+                $content = str_replace("__('$sentence')", "__('$new_key')", $content);
             }
         }
 
