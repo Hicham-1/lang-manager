@@ -95,7 +95,7 @@ class LanguageCommand extends Command
             $folder = $folder[0];
         }
 
-        $translation_file = "lang/{$lang}/{$folder}.php";
+        $translation_file = base_path("lang/{$lang}/{$folder}.php");
 
         $translations = [];
         if (is_file($translation_file)) {
@@ -138,14 +138,14 @@ class LanguageCommand extends Command
 
         $formatted = strtolower(str_replace(' ', '_', trim($sentence)));
 
-        $words = explode(' ', $sentence);
+        // $words = explode(' ', $sentence);
 
-        if (count($words) > 4) {
-            $first_four_words = implode('_', array_slice($words, 0, 4));
-            $rest_word_count = count($words) - 4;
+        // if (count($words) > 4) {
+        //     $first_four_words = implode('_', array_slice($words, 0, 4));
+        //     $rest_word_count = count($words) - 4;
 
-            return strtolower($first_four_words) . '_' . $rest_word_count;
-        }
+        //     return strtolower($first_four_words) . '_' . $rest_word_count;
+        // }
 
         return $formatted;
     }
