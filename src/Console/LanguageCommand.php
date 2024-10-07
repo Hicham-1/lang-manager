@@ -108,7 +108,7 @@ class LanguageCommand extends Command
         }
 
         $content = file_get_contents($file);
-        $pattern = '/__\(\s*[\'"]([^\'"]+)[\'"]\s*\)/';
+        $pattern = '/__\([\']([^\'"]+)[\']\)/';
 
         preg_match_all($pattern, $content, $matches);
 
