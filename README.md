@@ -22,7 +22,7 @@ After installing the package, you need to register the service provider. Add the
 
 ## Usage
 
-Your sentence should be inside the function ``__()`` like:
+Your sentence should be inside the function ``__()`` and use single-quotes ``'`` like:
 
 ```html
 <h5>{{ __('Your sentence here') }}</h5>
