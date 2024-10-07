@@ -113,9 +113,13 @@ class LanguageCommand extends Command
         preg_match_all($pattern, $content, $matches);
 
         foreach ($matches[1] as $sentence) {
-            $new_key = $this->translation_key_prepare($sentence);
-
             $path = base_path("lang/{$lang}/{$sentence}.php");
+
+            if (!is_file($path) && \Lang::has($sentence, $lang)) {
+                continue;
+            }
+
+            $new_key = $this->translation_key_prepare($sentence);
 
             if (is_file($path) || !\Lang::has($new_key, $lang)) {
                 $translations[$new_key] = $sentence;
