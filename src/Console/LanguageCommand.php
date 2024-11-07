@@ -138,7 +138,7 @@ class LanguageCommand extends Command
 
     private function translation_key_prepare($sentence)
     {
-        $sentence = preg_replace('/[^a-zA-Z0-9\._ ]/', '', $sentence);
+        $sentence = preg_replace('/[^a-zA-Z0-9_ ]/', '', $sentence);
 
         $formatted = strtolower(str_replace(' ', '_', trim($sentence)));
 
