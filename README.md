@@ -1,5 +1,9 @@
 # Laravel Language Manager
 
+[![Latest Version](https://img.shields.io/packagist/v/h1ch4m/lang-manager.svg?style=flat-square)](https://packagist.org/packages/h1ch4m/lang-manager)
+[![Total Downloads](https://img.shields.io/packagist/dt/h1ch4m/lang-manager.svg?style=flat-square)](https://packagist.org/packages/h1ch4m/lang-manager)
+[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
+
 A Laravel package for create language keys on your lang file from a given path (like views/).
 
 ## Installation
