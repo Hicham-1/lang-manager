@@ -95,6 +95,8 @@ class LanguageCommand extends Command
             $folder = $folder[0];
         }
 
+        $folder = strtolower($folder);
+
         $translation_file = base_path("lang/{$lang}/{$folder}.php");
 
         $translations = [];
