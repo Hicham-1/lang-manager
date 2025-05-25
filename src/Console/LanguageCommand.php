@@ -110,29 +110,35 @@ class LanguageCommand extends Command
         }
 
         $content = file_get_contents($file);
-        $pattern = '/__\([\']([^\'"]+)[\']\)/';
+        // Updated regex to capture parameters
+        $pattern = '/__\(\s*[\'"]([^\'"]+)[\'"]\s*(,.*?)?\)/s';
 
-        preg_match_all($pattern, $content, $matches);
+        $content = preg_replace_callback(
+            $pattern,
+            function ($matches) use (&$translations, $folder, $lang) {
+                $sentence = $matches[1];
+                $params = $matches[2] ?? '';
 
-        foreach ($matches[1] as $sentence) {
-            $path = base_path("lang/{$lang}/{$sentence}.php");
+                $new_key = $this->translation_key_prepare($sentence);
+                $namespaced_key = "$folder.$new_key";
 
-            if (!is_file($path) && \Lang::has($sentence, $lang)) {
-                continue;
-            }
+                // Check if the original or namespaced translation exists
+                $original_exists = \Lang::has($sentence, $lang);
+                $namespaced_exists = \Lang::has($namespaced_key, $lang) || array_key_exists($new_key, $translations);
 
-            $new_key = $this->translation_key_prepare($sentence);
-
-            if (is_file($path) || !\Lang::has($new_key, $lang)) {
-                $translations[$new_key] = $sentence;
-                $content = str_replace("__('$sentence')", "__('$folder.$new_key')", $content);
-            }
-
-            //$new_key != $sentence
-            if (!\Lang::has($sentence, $lang)) {
-                $content = str_replace("__('$sentence')", "__('$new_key')", $content);
-            }
-        }
+                if ($original_exists) {
+                    // Keep the original if it exists
+                    return "__('$sentence'$params)";
+                } else {
+                    // Add to translations if not exists and use namespaced key
+                    if (!$namespaced_exists) {
+                        $translations[$new_key] = $sentence;
+                    }
+                    return "__('$namespaced_key'$params)";
+                }
+            },
+            $content
+        );
 
         file_put_contents($file, $content);
         file_put_contents($translation_file, "<?php\n\nreturn " . var_export($translations, true) . ";\n");

@@ -30,6 +30,7 @@ Your sentence should be inside the function ``__()`` and use single-quotes ``'``
 
 ```html
 <h5>{{ __('Your sentence here') }}</h5>
+<h5>{{ __('Your sentence :here', ['here' => 'sentence value']) }}</h5>
 ```
 
 ``⚠️ Please commit your changes before run the command, just to be able to reset your work if you don't like the command result.``
